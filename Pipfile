@@ -7,6 +7,9 @@ verify_ssl = true
 
 [packages]
 flask = "*"
+tensorflow = "*"
+pandas = "*"
+nltk = "*"
 
 [requires]
 python_version = "3.7"
