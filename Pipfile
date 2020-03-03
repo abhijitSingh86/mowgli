@@ -4,11 +4,11 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-mowgli = {editable = true,path = "."}
 pytest = "*"
 pytest-mock = "*"
 
 [packages]
+mowgli = {editable = true,path = "."}
 flask = "*"
 tensorflow = "*"
 pandas = "*"
