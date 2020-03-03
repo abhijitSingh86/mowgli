@@ -20,5 +20,5 @@ def classify_intent():
         return "Message is not present", 400
 
     message = request.get_json()['message']
-    intent_classifier.classify(message)
-    return {'intent': {'name': 'foo_intent', 'probability': 1.0}}
+    intent, probability = intent_classifier.classify(message)
+    return {'intent': {'name': intent, 'probability': probability}}

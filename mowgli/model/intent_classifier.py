@@ -1,2 +1,2 @@
 def classify(foo):
-    pass
+    return 'foo_intent', 1.0
