@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "026254d7c17fe6576cfc5dd618a1ae32c96be15257d585926305c71e616e24a7"
+            "sha256": "51a2e5bbb752aea43c558fa991085e86464ee272c24db9f9f96a2c0c6fcd8cfe"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -297,9 +297,10 @@
         },
         "opt-einsum": {
             "hashes": [
-                "sha256:edfada4b1d0b3b782ace8bc14e80618ff629abf53143e1e6bbf9bd00b11ece77"
+                "sha256:738b0a1db1d3084d360081bb64d826f9db06d2df7cc0bf8e2c9356028da1fa31",
+                "sha256:f6fbfbb759e670305c5c9a4dc4432e30f65e06fede88293dacfe19915af73386"
             ],
-            "version": "==3.1.0"
+            "version": "==3.2.0"
         },
         "pandas": {
             "hashes": [
@@ -492,5 +493,10 @@
             "version": "==1.12.0"
         }
     },
-    "develop": {}
+    "develop": {
+        "mowgli": {
+            "editable": true,
+            "path": "."
+        }
+    }
 }
