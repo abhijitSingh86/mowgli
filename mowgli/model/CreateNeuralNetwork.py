@@ -31,7 +31,7 @@ def loadData(fileName, isNormalizee = False):
 def begin():
     # Load train and label data
     # normalize oder lammitize oder lancasterStemmer
-    # create network
+    # create model
     # feed
     print("beginning")
     traindData = loadData("train.csv", True)

@@ -5,6 +5,8 @@ verify_ssl = true
 
 [dev-packages]
 mowgli = {editable = true,path = "."}
+pytest = "*"
+pytest-mock = "*"
 
 [packages]
 flask = "*"
