@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 pytest = "*"
 pytest-mock = "*"
+pylint = "*"
 
 [packages]
 mowgli = {editable = true,path = "."}
