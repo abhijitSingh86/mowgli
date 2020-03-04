@@ -16,6 +16,11 @@ There is a openapi 3.0 documentation for the api at `doc/api.yaml`.
 pipenv run pytest
 ```
 
+## Run linter
+```bash
+pipenv run pylint mowgli
+```
+
 ## Run development server
 ```bash
 pipenv run mowgli/run.py
