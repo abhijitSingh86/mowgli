@@ -6,4 +6,4 @@ ADD mowgli $APP_DIR/mowgli/
 RUN pip install -r requirements.txt
 RUN useradd -M -s /bin/sh mowgli && chown -R mowgli:mowgli $APP_DIR
 USER mowgli
-CMD gunicorn -w 4 -b 0.0.0.0:$PORT mowgli.infrastructure.endpoints:app
+CMD gunicorn -w 4 -b 0.0.0.0:$PORT mowgli.infrastructure.endpoints:APP
