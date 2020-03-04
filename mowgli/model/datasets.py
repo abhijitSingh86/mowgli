@@ -7,4 +7,4 @@ def parse(line):
 
 
 def load_dataset(_dataset_path):
-    return tf.data.TextLineDataset(_dataset_path).map(lambda x: parse(x))
+    return tf.data.TextLineDataset(_dataset_path).map(parse)
