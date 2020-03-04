@@ -18,7 +18,7 @@ pipenv run pytest
 
 ## Run linter
 ```bash
-pipenv run pylint mowgli
+pipenv run lint
 ```
 
 ## Run development server

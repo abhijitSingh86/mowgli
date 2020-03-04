@@ -16,5 +16,8 @@ pandas = "*"
 nltk = "*"
 gunicorn = "*"
 
+[scripts]
+lint = "pylint mowgli"
+
 [requires]
 python_version = "3.7"

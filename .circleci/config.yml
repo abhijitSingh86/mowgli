@@ -48,7 +48,7 @@ jobs:
             - "/usr/local/lib/python3.7/site-packages"
       - run:
           name: Run linter
-          command: pipenv run pylint mowgli
+          command: pipenv run lint
 
 workflows:
   build-test-deploy:
