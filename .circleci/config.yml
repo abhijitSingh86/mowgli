@@ -84,6 +84,20 @@ jobs:
           root: ~/repo
           paths:
             - docker
+  deploy-staging:
+    machine: true
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Build and push Docker image to Heroku
+          command: |
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            heroku container:login
+            cd docker
+            heroku container:push -a mowgli-staging web
+            heroku container:release -a mowgli-staging web
 
 workflows:
   build-test-deploy:
@@ -94,3 +108,7 @@ workflows:
           requires:
             - test
             - lint
+      - deploy-staging:
+          requires:
+            - prepare-docker
+
