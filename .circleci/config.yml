@@ -93,4 +93,4 @@ workflows:
       - prepare-docker:
           requires:
             - test
-            -lint
+            - lint
