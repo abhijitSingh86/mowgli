@@ -15,6 +15,11 @@ There is a openapi 3.0 documentation for the api at `doc/api.yaml`.
 pipenv run pytest
 ```
 
+## Run development server
+```bash
+pipenv run mowgli/run.py
+```
+
     . Create an endpoint with GET /api/v1/intent
     . create a tensorflow network
     . train and test
