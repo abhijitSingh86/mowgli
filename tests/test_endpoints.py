@@ -1,8 +1,8 @@
 from mowgli.infrastructure import endpoints
 
-endpoints.app.testing = True
+endpoints.APP.testing = True
 
-with endpoints.app.test_client() as client:
+with endpoints.APP.test_client() as client:
     def test_should_return_status_ok():
         response = client.get('/ping', content_type='html/text')
 

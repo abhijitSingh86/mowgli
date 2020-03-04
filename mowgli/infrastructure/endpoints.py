@@ -2,19 +2,19 @@ from flask import Flask, request
 
 from mowgli.model import intent_classifier
 
-app = Flask(__name__)
+APP = Flask(__name__)
 
 
-@app.route('/ping')
+@APP.route('/ping')
 def ping():
     return 'PONG'
 
 
-def is_valid(request):
-    return request.is_json and 'message' in request.get_json()
+def is_valid(incoming_request):
+    return incoming_request.is_json and 'message' in incoming_request.get_json()
 
 
-@app.route('/intent', methods=['POST'])
+@APP.route('/intent', methods=['POST'])
 def classify_intent():
     if not is_valid(request):
         return "Message is not present", 400
