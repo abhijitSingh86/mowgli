@@ -98,6 +98,20 @@ jobs:
             cd docker
             heroku container:push -a mowgli-staging web
             heroku container:release -a mowgli-staging web
+  deploy-production:
+    machine: true
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Build and push Docker image to Heroku
+          command: |
+            sudo curl https://cli-assets.heroku.com/install.sh | sh
+            heroku container:login
+            cd docker
+            heroku container:push -a mowgli-production web
+            heroku container:release -a mowgli-production web
 
 workflows:
   build-test-deploy:
@@ -111,4 +125,7 @@ workflows:
       - deploy-staging:
           requires:
             - prepare-docker
+      - deploy-production:
+          requires:
+            - deploy-staging
 
