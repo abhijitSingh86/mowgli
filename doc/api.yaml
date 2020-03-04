@@ -1,0 +1,65 @@
+openapi: 3.0.1
+info:
+  title: Mowgli
+  description: API definition for Mowgli
+  contact:
+    email: balu-chatbot@thoughtworks.com
+  license:
+    name: MIT
+    url: https://github.com/abhijitSingh86/mowgli/blob/master/LICENSE
+  version: 0.1.0
+servers:
+  - url: /
+paths:
+  /intent:
+    post:
+      tags:
+        - intent
+      summary: Classify a sentence into an intent
+      requestBody:
+        description: Message that needs to be classified
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageDTO'
+        required: true
+      responses:
+        "200":
+          description: Successful classification
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntentDTO'
+        "400":
+          description: Invalid input
+          content: {}
+      x-codegen-request-body-name: body
+components:
+  schemas:
+    MessageDTO:
+      required:
+        - message
+      type: object
+      properties:
+        message:
+          type: string
+          example: Hello, how are you?
+    Intent:
+      required:
+        - name
+        - probability
+      type: object
+      properties:
+        name:
+          type: string
+        probability:
+          type: number
+          format: double
+          example: 0.9
+    IntentDTO:
+      required:
+        - intent
+      type: object
+      properties:
+        intent:
+          $ref: '#/components/schemas/Intent'
