@@ -11,7 +11,7 @@ pylint = "*"
 [packages]
 mowgli = {editable = true,path = "."}
 flask = "*"
-tensorflow = "*"
+tensorflow = "==2.1.0"
 pandas = "*"
 nltk = "*"
 gunicorn = "*"
