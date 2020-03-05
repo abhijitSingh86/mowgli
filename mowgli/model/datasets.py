@@ -1,4 +1,6 @@
 import tensorflow as tf
+import tensorflow_text as text
+import numpy as np
 
 
 def parse(line):
@@ -6,5 +8,10 @@ def parse(line):
     return tf.strings.to_number(split_line[0], out_type=tf.dtypes.int32), split_line[1]
 
 
-def load_dataset(_dataset_path):
-    return tf.data.TextLineDataset(_dataset_path).map(parse)
+def load_dataset(dataset_path):
+    return tf.data.TextLineDataset(dataset_path).map(parse)
+
+
+def tokenize(dataset):
+    tokenizer = text.WhitespaceTokenizer()
+    return tokenizer.tokenize(dataset)
