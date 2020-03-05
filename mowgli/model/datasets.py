@@ -20,9 +20,6 @@ def tokenize(dataset):
 
 
 def encode_vectorize(dataset, vocabulary_count):
-    # map over all elements in dataset
-    # each element of dataset needs to go through count vectorizer
-    # dataset.map(vecatorizer.aksdjalkjsda)
     vectorizer = CountVectorizer(max_features=vocabulary_count)
     encodedMatrix = vectorizer.fit_transform(dataset)
     return encodedMatrix, vectorizer
