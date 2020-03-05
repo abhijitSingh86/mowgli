@@ -23,6 +23,6 @@ def encode_vectorize(dataset, vocabulary_count):
     # map over all elements in dataset
     # each element of dataset needs to go through count vectorizer
     # dataset.map(vecatorizer.aksdjalkjsda)
-    vectorizer = CountVectorizer()
-    encoder = tfds.features.text.TextEncoder()
-    return encoder.encode(dataset)
+    vectorizer = CountVectorizer(max_features=vocabulary_count)
+    encodedMatrix = vectorizer.fit_transform(dataset)
+    return encodedMatrix, vectorizer
