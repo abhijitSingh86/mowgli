@@ -15,9 +15,18 @@ def test_should_load_dataset_with_3_entries():
 
 
 def test_should_tokenize_dataeset():
-    given_dataset = tf.constant(['foo bar.', 'spaghetti'])
+    given_dataset = tf.constant(['foo ba.', 'spaghetti'])
 
     actual = datasets.tokenize(given_dataset).to_list()
-    expected = [[b'foo', b'bar.'], [b'spaghetti']]
+    expected = [[b'foo', b'bar'], [b'spaghetti']]
+
+    assert expected == actual
+
+
+def test_should_encode_tokenized_dataset():
+    given_dataset = tf.constant([['foo', 'bar', 'spaghetti'], ['spaghetti', 'bar', 'bar']])
+
+    actual = datasets.encode_vectorize(given_dataset, 3)
+    expected = [[1, 1, 1], [0, 2, 1]]
 
     assert expected == actual

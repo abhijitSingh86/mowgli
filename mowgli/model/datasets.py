@@ -1,6 +1,8 @@
 import tensorflow as tf
 import tensorflow_text as text
 import numpy as np
+import tensorflow_datasets as tfds
+from sklearn.feature_extraction.text import CountVectorizer
 
 
 def parse(line):
@@ -15,3 +17,12 @@ def load_dataset(dataset_path):
 def tokenize(dataset):
     tokenizer = text.WhitespaceTokenizer()
     return tokenizer.tokenize(dataset)
+
+
+def encode_vectorize(dataset, vocabulary_count):
+    # map over all elements in dataset
+    # each element of dataset needs to go through count vectorizer
+    # dataset.map(vecatorizer.aksdjalkjsda)
+    vectorizer = CountVectorizer()
+    encoder = tfds.features.text.TextEncoder()
+    return encoder.encode(dataset)

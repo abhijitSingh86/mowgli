@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "146c8abc6826759dff17e286ac653d7585357f6c99fd08fc6d41048aff7acaa1"
+            "sha256": "60040605c40e49388a666f492e76fdda31f626168fc9cc78a00e29d315ca57a0"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -28,6 +28,13 @@
                 "sha256:6a6effda93f4e1ce9f618779b2dd1d9d84f1e32812c23a29b3fff6fd7f63fa5e"
             ],
             "version": "==0.8.1"
+        },
+        "attrs": {
+            "hashes": [
+                "sha256:08a96c641c3a74e44eb59afb61a24f2cb9f4d7188748e76ba4bb5edfa3cb7d1c",
+                "sha256:f7b7ce16570fe9965acd6d30101a28f62fb4a7f9e926b3bbc9b61f8b04247e72"
+            ],
+            "version": "==19.3.0"
         },
         "cachetools": {
             "hashes": [
@@ -57,6 +64,12 @@
             ],
             "version": "==7.0"
         },
+        "dill": {
+            "hashes": [
+                "sha256:42d8ef819367516592a825746a18073ced42ca169ab1f5f4044134703e7a049c"
+            ],
+            "version": "==0.3.1.1"
+        },
         "flask": {
             "hashes": [
                 "sha256:13f9f196f330c7c2c5d7a5cf91af894110ca0215ac051b5844701f2bfd934d52",
@@ -64,6 +77,12 @@
             ],
             "index": "pypi",
             "version": "==1.1.1"
+        },
+        "future": {
+            "hashes": [
+                "sha256:b1bead90b70cf6ec3f0710ae53a525360fa360d306a86583adc6bf83a4db537d"
+            ],
+            "version": "==0.18.2"
         },
         "gast": {
             "hashes": [
@@ -92,6 +111,12 @@
                 "sha256:713813a9f7d6589e5defdaf21e80e4392eb124662f8bd829acd51a4f8735c0cb"
             ],
             "version": "==0.1.8"
+        },
+        "googleapis-common-protos": {
+            "hashes": [
+                "sha256:013c91704279119150e44ef770086fdbba158c1f978a6402167d47d5409e226e"
+            ],
+            "version": "==1.51.0"
         },
         "grpcio": {
             "hashes": [
@@ -334,6 +359,12 @@
             "index": "pypi",
             "version": "==1.0.1"
         },
+        "promise": {
+            "hashes": [
+                "sha256:dfd18337c523ba4b6a58801c164c1904a9d4d1b1747c7d5dbf45b693a49d93d0"
+            ],
+            "version": "==2.3"
+        },
         "protobuf": {
             "hashes": [
                 "sha256:0bae429443cc4748be2aadfdaf9633297cfaeb24a9a02d0ab15849175ce90fab",
@@ -463,11 +494,26 @@
             "index": "pypi",
             "version": "==2.1.0"
         },
+        "tensorflow-datasets": {
+            "hashes": [
+                "sha256:333e6aa16a7f066949460f1a88d19d6c7cb27a7ceb9d3515d77d85b9f5f7afb9",
+                "sha256:8ea92c1698be99a86bc99f9348cb40e8e0e328ca221b2c67aff32f5706ac220d",
+                "sha256:e890dc68dd28928d2c7e02baa703402291b3bfe2cf31bc0fc4dad8ea880329f4"
+            ],
+            "index": "pypi",
+            "version": "==2.1.0"
+        },
         "tensorflow-estimator": {
             "hashes": [
                 "sha256:e5c5f648a636f18d1be4cf7ed46132b108a2f0f3fd9f1c850eba924263dc6972"
             ],
             "version": "==2.1.0"
+        },
+        "tensorflow-metadata": {
+            "hashes": [
+                "sha256:5ad75b5b99dc1ada51d20c139d571dd009bcec7d553ed336ce8b89370ba6c8a3"
+            ],
+            "version": "==0.21.1"
         },
         "tensorflow-text": {
             "hashes": [
@@ -487,6 +533,13 @@
                 "sha256:1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b"
             ],
             "version": "==1.1.0"
+        },
+        "tqdm": {
+            "hashes": [
+                "sha256:0d8b5afb66e23d80433102e9bd8b5c8b65d34c2a2255b2de58d97bd2ea8170fd",
+                "sha256:f35fb121bafa030bd94e74fcfd44f3c2830039a2ddef7fc87ef1c2d205237b24"
+            ],
+            "version": "==4.43.0"
         },
         "urllib3": {
             "hashes": [
