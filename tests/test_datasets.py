@@ -35,5 +35,4 @@ def test_model_should_return_correct_intent():
     actual, vectorizer = datasets.encode_vectorize(given_dataset, len(given_dataset))
     model = datasets.build_network(actual, vectorizer, np.ones(len(given_dataset)))
 
-    input_text = "hello"
-    output = 1
+    # assert model != None

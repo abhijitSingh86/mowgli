@@ -19,8 +19,8 @@ def tokenize(dataset):
 
 def encode_vectorize(dataset, vocabulary_count):
     vectorizer = CountVectorizer(max_features=vocabulary_count)
-    encodedMatrix = vectorizer.fit_transform(dataset)
-    return encodedMatrix, vectorizer
+    encoded_matrix = vectorizer.fit_transform(dataset)
+    return encoded_matrix, vectorizer
 
 
 def build_network(bags, vectorizer, labels):
