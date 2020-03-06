@@ -16,7 +16,6 @@ pandas = "*"
 nltk = "*"
 gunicorn = "*"
 tensorflow-text = "*"
-sklearn-feature-extraction = "*"
 scikit-learn = "*"
 
 [scripts]

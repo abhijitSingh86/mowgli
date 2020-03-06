@@ -1,7 +1,5 @@
 import tensorflow as tf
 import tensorflow_text as text
-import numpy as np
-import tensorflow_datasets as tfds
 from sklearn.feature_extraction.text import CountVectorizer
 
 
@@ -23,3 +21,7 @@ def encode_vectorize(dataset, vocabulary_count):
     vectorizer = CountVectorizer(max_features=vocabulary_count)
     encodedMatrix = vectorizer.fit_transform(dataset)
     return encodedMatrix, vectorizer
+
+
+def build_network(bags, vectorizer, labels):
+    pass

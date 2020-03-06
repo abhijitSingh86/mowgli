@@ -1,7 +1,6 @@
 import numpy as np
-import tensorflow_text as text
-import tensorflow as tf
 import numpy.testing as npt
+import tensorflow as tf
 
 from mowgli.model import datasets
 
@@ -27,5 +26,14 @@ def test_should_encode_tokenized_dataset():
     given_dataset = ['foo bar spaghetti', 'spaghetti bar bar']
     actual, vectorizer = datasets.encode_vectorize(given_dataset, 3)
     expected = np.array([[1, 1, 1], [2, 0, 1]])
+    npt.assert_array_equal(expected, actual.toarray())
 
-    npt.assert_array_equal(expected,actual.toarray())
+
+def test_model_should_return_correct_intent():
+    given_dataset = ['hey balu', 'hello balu', 'hi balu', 'good afternoon', 'good day', 'good evening', 'good morning',
+                     'moin', 'ohai', 'Hi', 'Hey', 'Hi bot']
+    actual, vectorizer = datasets.encode_vectorize(given_dataset, len(given_dataset))
+    model = datasets.build_network(actual, vectorizer, np.ones(len(given_dataset)))
+
+    input_text = "hello"
+    output = 1
