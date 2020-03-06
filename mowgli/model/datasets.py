@@ -49,12 +49,12 @@ def build_network(bags, vectorizer, labels):
     train_x,validate_x = split(bags)
     train_y,validate_y = split(labels)
     history = model.fit(train_x, train_y,
-                        batch_size=3,
+                        batch_size=2,
                         epochs=3,
                         # We pass some validation for
                         # monitoring validation loss and metrics
                         # at the end of each epoch
-                        validation_data=(validate_x,validate_y))
+                        validation_data=(validate_x, validate_y))
 
     print('\nhistory dict:', history.history)
     return model
