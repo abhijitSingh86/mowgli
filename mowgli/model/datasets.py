@@ -1,9 +1,12 @@
+import pickle
+
 import tensorflow as tf
 import tensorflow_text as text
 from sklearn.feature_extraction.text import CountVectorizer
 from tensorflow import keras
-from tensorflow.keras import layers
-import pickle
+from tensorflow_core.python.keras import layers
+
+from mowgli.utils import constants
 
 
 def parse(line):
@@ -20,43 +23,45 @@ def tokenize(dataset):
     return tokenizer.tokenize(dataset)
 
 
+def persist_vectorizer(vectorizer):
+    pickle.dump(vectorizer, open(constants.VECTORIZER_PATH, 'wb'))
+
+
 def encode_vectorize(dataset, vocabulary_count):
     vectorizer = CountVectorizer(max_features=vocabulary_count)
     encoded_matrix = vectorizer.fit_transform(dataset)
-    pickle.dump(vectorizer, open("data/model/vectorizer", 'wb'))
     return encoded_matrix, vectorizer
 
 
 def split(data):
-    length = int(len(data)*.8)
+    length = int(len(data) * .8)
     return data[0:length], data[length:]
 
-def build_network(bags, vectorizer, labels):
-    bags = bags.toarray()
-    input = keras.Input(shape=[len(bags[0]), ], name='tokens')
-    print(input)
 
-    x = layers.Dense(8)(input)
-    x = layers.Dense(8, activation="softmax")(x)
+def build_network(bags, labels):
+    bags = bags.toarray()
+    input_layer = keras.Input(shape=[len(bags[0]), ], name='tokens')
+    hidden_layer = layers.Dense(8)(input_layer)
+    hidden_layer = layers.Dense(8, activation="softmax")(hidden_layer)
     # print(len(labels[0]))
-    outputs = layers.Dense(2, name='IntentClassification')(x)
-    print(outputs)
-    model = keras.Model(inputs=input, outputs=outputs)
+    output_layer = layers.Dense(2, name='IntentClassification')(hidden_layer)
+    print(output_layer)
+    model = keras.Model(inputs=input_layer, outputs=output_layer)
     model.compile(optimizer=keras.optimizers.RMSprop(),  # Optimizer
                   # Loss function to minimize
                   loss="mean_squared_error",
                   metrics=['mae', 'acc']
-                 )
+                  )
     print('# Fit model on training data')
 
-    train_x,validate_x = split(bags)
-    train_y,validate_y = split(labels)
-    print('validation sets', validate_x.shape , validate_y.shape)
-    print('train sets', train_x.shape , train_y.shape)
+    train_x, validate_x = split(bags)
+    train_y, validate_y = split(labels)
+    print('validation sets', validate_x.shape, validate_y.shape)
+    print('train sets', train_x.shape, train_y.shape)
     history = model.fit(train_x, train_y,
                         batch_size=2,
                         epochs=3)
 
-    model.save("data/model/model.h5")
+    model.save(constants.MODEL_PATH)
     print('\nhistory dict:', history.history)
     return model

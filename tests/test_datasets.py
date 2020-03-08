@@ -4,8 +4,8 @@ import numpy as np
 import numpy.testing as npt
 import tensorflow as tf
 from tensorflow_core.python.keras.models import load_model
-
 from mowgli.model import datasets
+from mowgli.utils import constants
 
 
 def test_should_load_dataset_with_3_entries():
@@ -36,16 +36,16 @@ def test_model_should_return_correct_intent():
     given_dataset = ['hey balu', 'hello balu', 'hi balu', 'good afternoon', 'good day', 'good evening', 'good morning',
                      'moin', 'ohai', 'Hi', 'Hey', 'Hi bot']
     actual, vectorizer = datasets.encode_vectorize(given_dataset, len(given_dataset))
-    labels = np.stack((np.ones((len(given_dataset))) , np.zeros((len(given_dataset)))), axis=1)
-    model = datasets.build_network(actual, vectorizer, labels)
-
+    datasets.persist_vectorizer(vectorizer)
+    labels = np.stack((np.ones((len(given_dataset))), np.zeros((len(given_dataset)))), axis=1)
+    model = datasets.build_network(actual, labels)
     assert model != None
 
 def test_model_should_predict_correct_intent():
     input_str = "hello"
-    vectorizer = pickle.load(open("data/model/vectorizer", 'rb'))
+    vectorizer = pickle.load(open(constants.VECTORIZER_PATH, 'rb'))
     encoded_matrix = vectorizer.transform([input_str]).toarray()
-    model = load_model("data/model/model.h5")
+    model = load_model(constants.MODEL_PATH)
     print('Encoded Matrix', encoded_matrix)
     result = model.predict(encoded_matrix)
     print(result)
