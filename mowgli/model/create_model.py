@@ -27,6 +27,3 @@ def create_model():
     model = build_network(encoded[len(message_test_x):], train_y, encoded[0:len(message_test_x)],
                           test_y, epochs=6)
     model.save(constants.MODEL_PATH)
-
-
-create_model()

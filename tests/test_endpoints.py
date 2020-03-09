@@ -10,19 +10,40 @@ with endpoints.APP.test_client() as client:
         assert b'PONG' == response.data
 
 
-    def test_should_return_classified_intent(mocker):
-        predict_mock = mocker.patch('mowgli.model.intent_classifier.classify')
-        predict_mock.return_value = ('foo_intent', 1.0)
+    def test_should_return_classified_hello_intent(mocker):
+
         request_json = {
-            'message': 'Hey'
+            'message': 'Hello'
         }
         response = client.post('/intent', json=request_json)
         actual = response.get_json()
-        expected = {'intent': {'name': 'foo_intent', 'probability': 1.0}}
+        expected = {'intent': {'name': 'greet', 'probability': 1.0}}
 
         assert 200 == response.status_code
         assert expected == actual
-        predict_mock.assert_called_with(request_json['message'])
+
+
+    def test_should_return_classified_leave_intent(mocker):
+
+        request_json = {
+            'message': 'Show me my leave balance'
+        }
+        response = client.post('/intent', json=request_json)
+        actual = response.get_json()
+        expected = {'intent': {'name': 'leave_budget', 'probability': 1.0}}
+
+        assert 200 == response.status_code
+        assert expected == actual
+
+        request_json = {
+            'message': 'my leave balance'
+        }
+        response = client.post('/intent', json=request_json)
+        actual = response.get_json()
+        expected = {'intent': {'name': 'leave_budget', 'probability': 1.0}}
+
+        assert 200 == response.status_code
+        assert expected == actual
 
 
     def test_should_return_400():
