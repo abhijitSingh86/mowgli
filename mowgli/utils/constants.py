@@ -1,2 +1,5 @@
 MODEL_PATH = "data/model/model.h5"
 VECTORIZER_PATH = "data/model/vectorizer"
+TRAIN_DATA_PATH = "./resources/train.csv"
+TEST_DATA_PATH = "./resources/test.csv"
+LABEL_DATA_PATH = "./resources/labels.csv"
