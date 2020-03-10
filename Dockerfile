@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.5
 ENV APP_DIR=/usr/src/app/
 WORKDIR $APP_DIR
 ADD requirements.txt setup.py README.md $APP_DIR
