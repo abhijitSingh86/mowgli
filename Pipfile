@@ -20,4 +20,4 @@ scikit-learn = "*"
 lint = "pylint mowgli"
 
 [requires]
-python_version = "3.5"
+python_version = "3.7"

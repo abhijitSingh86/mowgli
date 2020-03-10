@@ -4,13 +4,13 @@ jobs:
   test:
     working_directory: ~/repo
     docker:
-      - image: circleci/python:3.5
+      - image: circleci/python:3.7
         environment:
           PIPENV_VENV_IN_PROJECT: true
     steps:
       - checkout
       - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.5/site-packages
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
       - restore_cache:
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
@@ -21,20 +21,20 @@ jobs:
           paths:
             - ".venv"
             - "/usr/local/bin"
-            - "/usr/local/lib/python3.5/site-packages"
+            - "/usr/local/lib/python3.7/site-packages"
       - run:
           name: Run tests
           command: pipenv run pytest
   lint:
     working_directory: ~/repo
     docker:
-      - image: circleci/python:3.5
+      - image: circleci/python:3.7
         environment:
           PIPENV_VENV_IN_PROJECT: true
     steps:
       - checkout
       - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.5/site-packages
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
       - restore_cache:
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
@@ -45,20 +45,20 @@ jobs:
           paths:
             - ".venv"
             - "/usr/local/bin"
-            - "/usr/local/lib/python3.5/site-packages"
+            - "/usr/local/lib/python3.7/site-packages"
       - run:
           name: Run linter
           command: pipenv run lint
   prepare-docker:
     working_directory: ~/repo
     docker:
-      - image: circleci/python:3.5
+      - image: circleci/python:3.7
         environment:
           PIPENV_VENV_IN_PROJECT: true
     steps:
       - checkout
       - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.5/site-packages
+      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.7/site-packages
       - restore_cache:
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
@@ -69,7 +69,7 @@ jobs:
           paths:
             - ".venv"
             - "/usr/local/bin"
-            - "/usr/local/lib/python3.5/site-packages"
+            - "/usr/local/lib/python3.7/site-packages"
       - run:
           name: Create docker folder with all needed files
           command: |
