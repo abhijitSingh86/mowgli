@@ -80,6 +80,8 @@ jobs:
             cp setup.py docker/
             cp README.md docker/
             cp -R mowgli docker/
+            cp -R resources docker/
+            cp -R data docker/
       - persist_to_workspace:
           root: ~/repo
           paths:
