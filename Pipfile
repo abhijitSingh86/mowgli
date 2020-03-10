@@ -12,7 +12,6 @@ pylint = "*"
 mowgli = {editable = true,path = "."}
 flask = "*"
 tensorflow = "==2.1.0"
-nltk = "*"
 gunicorn = "*"
 tensorflow-text = "*"
 scikit-learn = "*"
