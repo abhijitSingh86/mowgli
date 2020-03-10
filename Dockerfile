@@ -8,4 +8,4 @@ ADD data $APP_DIR/data/
 RUN pip install -r requirements.txt
 RUN useradd -M -s /bin/sh mowgli && chown -R mowgli:mowgli $APP_DIR
 USER mowgli
-CMD gunicorn -w 4 -b 0.0.0.0:$PORT mowgli.infrastructure.endpoints:APP
+CMD gunicorn -w 2 -b 0.0.0.0:$PORT mowgli.infrastructure.endpoints:APP
