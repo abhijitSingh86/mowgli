@@ -3,6 +3,7 @@ ENV APP_DIR=/usr/src/app/
 WORKDIR $APP_DIR
 ADD requirements.txt setup.py README.md $APP_DIR
 ADD mowgli $APP_DIR/mowgli/
+ADD data $APP_DIR/data/
 RUN pip install -r requirements.txt
 RUN useradd -M -s /bin/sh mowgli && chown -R mowgli:mowgli $APP_DIR
 USER mowgli

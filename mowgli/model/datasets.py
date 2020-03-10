@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 import tensorflow_text as text
 from sklearn.feature_extraction.text import CountVectorizer
-from tensorflow import keras
+from tensorflow_core.python import keras
 from tensorflow_core.python.keras import backend as K
 from tensorflow_core.python.keras import layers
 
