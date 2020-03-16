@@ -6,7 +6,8 @@ import tensorflow as tf
 from tensorflow_core.python.keras.models import load_model
 
 from mowgli.model import datasets
-from mowgli.model.datasets import reformat_network_dataset, split
+from mowgli.model.create_model import map_to_numpy_array
+from mowgli.model.datasets import load_dataset
 from mowgli.utils import constants
 
 
@@ -35,16 +36,33 @@ def test_should_encode_tokenized_dataset():
 
 
 def test_model_should_predict_correct_intent():
-    input_str = ["hi, balu", "hola", "greetings", "show me my leave balance", "cancel my leaves", "thank you", "stupid you", "bye", "what can you do"]
-    intent_labels = [2, 2, 2, 4, 4, 3, 8, 10, 11]
-    vectorizer = pickle.load(open(constants.VECTORIZER_PATH, 'rb'))
-    encoded_matrix = vectorizer.transform(input_str).toarray()
-    model = load_model(constants.MODEL_PATH)
-    print('Encoded Matrix', encoded_matrix)
-    result = model.predict(encoded_matrix)
-    print('result', result)
-    print('result', np.argmax(result, axis=1))
-    assert np.sum(np.equal(np.argmax(result, axis=1), np.array(intent_labels))) >= 8
+    label_arr = map_to_numpy_array(load_dataset('./resources/labels.csv'))
+    label_map = dict([[x[1], x[0]] for x in label_arr])
+    print(label_map)
+    input = np.array([
+        ["hi", label_map['greet']],
+        ["balu", label_map['greet']],
+        ["hola", label_map['greet']],
+        ["can i cancel?", label_map['leave_annual_cancel']],
+        ["greetings", label_map['greet']],
+        ["show me my leave balance", label_map['leave_budget']],
+        ["cancel my leaves", label_map['leave_annual_cancel']],
+        ["thank you", label_map['thanks']],
+        ["stupid you", label_map['insult']],
+        ["bye", label_map['goodbye']],
+        ["what can you do", label_map['skills']]
+    ])
 
+    result_arr = []
+    for i in range(0, 5):
+        intent_labels = [int(x) for x in input[:, -1].flatten()]
+        input_str = input[:, 0:1].flatten()
+        print('inputs', input_str, intent_labels)
+        vectorizer = pickle.load(open(constants.VECTORIZER_PATH, 'rb'))
+        encoded_matrix = vectorizer.transform(input_str).toarray()
+        model = load_model(constants.MODEL_PATH)
+        result = model.predict(encoded_matrix)
+        print('result', np.argmax(result, axis=1))
+        result_arr.append(np.sum(np.equal(np.argmax(result, axis=1), np.array(intent_labels))) >= 8)
 
-test_model_should_predict_correct_intent()
+    assert np.array(result_arr).sum() >= 4

@@ -35,12 +35,33 @@ with endpoints.APP.test_client() as client:
         assert 200 == response.status_code
         assert expected == actual
 
+
         request_json = {
             'message': 'my leave balance'
         }
         response = client.post('/intent', json=request_json)
         actual = response.get_json()
         expected = {'intent': {'name': 'leave_budget', 'probability': 1.0}}
+
+        assert 200 == response.status_code
+        assert expected == actual
+
+        request_json = {
+            'message': 'I want to cancel my leaves'
+        }
+        response = client.post('/intent', json=request_json)
+        actual = response.get_json()
+        expected = {'intent': {'name': 'leave_annual_cancel', 'probability': 1.0}}
+
+        assert 200 == response.status_code
+        assert expected == actual
+
+        request_json = {
+            'message': 'I want to book my leaves'
+        }
+        response = client.post('/intent', json=request_json)
+        actual = response.get_json()
+        expected = {'intent': {'name': 'book_leave', 'probability': 1.0}}
 
         assert 200 == response.status_code
         assert expected == actual

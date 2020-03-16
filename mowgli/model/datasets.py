@@ -74,9 +74,9 @@ def reformat_network_dataset(given_dataset, columne_size):
 
 def build_network(train_x, train_y, test_x, test_y, epochs):
     input_layer = keras.Input(shape=[train_x.shape[1], ], name='tokens')
-    hidden_layer = layers.Dense(100, activation="relu")(input_layer)
-    # hidden_layer = layers.Dense(50, activation="relu")(hidden_layer)
-    hidden_layer = layers.Dense(25, activation="relu")(hidden_layer)
+    hidden_layer = layers.Dense(150, activation="relu")(input_layer)
+    hidden_layer = layers.Dense(70, activation="relu")(hidden_layer)
+    # hidden_layer = layers.Dense(20, activation="relu")(hidden_layer)
     # print(len(labels[0]))
     output_layer = layers.Dense(len(train_y[0]), name='IntentClassification',
                                 activation="softmax")(hidden_layer)
@@ -84,7 +84,7 @@ def build_network(train_x, train_y, test_x, test_y, epochs):
     model.compile(optimizer='Adam',  # Optimizer
                   # Loss function to minimize
                   loss="categorical_crossentropy",
-                  metrics=['mae', 'acc']
+                  metrics=['mae', 'acc']  # ,recall_m,precision_m, f1_m]
                   )
     print('# Fit model on training data')
     print('validation sets', test_x.shape, test_y.shape)

@@ -1,3 +1,47 @@
+## intent:book_leave
+- book holiday
+- book holidays
+- I want to go on vacation
+- can i take a day off?
+- can i take some time off?
+- could i book some vacation?
+- could i book some vacation starting first of September?
+- i'd like book some vacation
+- i'd like to take some vacation
+- i'd like to apply for leave
+- i'd like to take some leave days
+- i'd like to book another holiday
+- i want to take some holidays
+- i want to book vacations
+- i would like to take a day off
+- i would like to take some time off
+- i would like to book some vacation
+- okay how about taking vacations can you do that?
+- okay, i want to book holiday
+- take vacation
+- Can I book any leave in 2018?
+- Can I book any leave in 2019?
+- Can I book any leave in 2020?
+
+## intent:leave_annual_cancel
+- abort my planned vacation
+- cancel my planned vacation
+- cancel future vacation
+- can i cancel?
+- can i cancel my planned vacation?
+- could i cancel a planned vacation?
+- i'd like to cancel a future vacation
+- i'd like to cancel a holiday i booked
+- i'd like to cancel some vacation
+- i want to cancel my future vacation
+- i would like to cancel my leave
+- i would like to cancel my vacation
+- i would need to cancel a booked vacation
+- would be great to be able to delete a canceled vacation
+- would like to cancel a planned vacation
+- i'd like to cancel some vacations
+- cancel some leave for me
+
 ## intent:greet
 - aloha
 - hai

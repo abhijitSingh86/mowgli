@@ -25,8 +25,8 @@ def create_model():
     encoded, vectorizer = datasets.encode_vectorize(concat, 100000)
     datasets.persist_vectorizer(vectorizer)
     model = build_network(encoded[len(message_test_x):], train_y, encoded[0:len(message_test_x)],
-                          test_y, epochs=6)
+                          test_y, epochs=5)
     model.save(constants.MODEL_PATH)
 
-#UnComment Me when running locally for model creation
-#create_model()
+# UnComment Me when running locally for model creation
+# create_model()
