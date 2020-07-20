@@ -18,6 +18,7 @@ scikit-learn = "*"
 
 [scripts]
 lint = "pylint mowgli"
+train= "python mowgli/model/create_model.py"
 
 [requires]
 python_version = "3.7"

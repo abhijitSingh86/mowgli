@@ -28,14 +28,13 @@ pipenv run mowgli/run.py
     
 ## Steps to train the neural network with more data
 
-Add your content i.e. the intent data into the existing nlu.md file. Use Lasagna tool to create new set of test,train 
-and labels csv files. Once the dataset is created, use create_model.py(just uncomment the last line of function call and 
-while committing comment it again) to create the network and evaluate the performance of the network. Which means more 
-or less looking at the accuracy and validation accuracy and having multiple runs with varying params to see something 
-changes. Once model have sufficient accuracy and also it passes all existing test cases fell free to commit and push the
- changes.
+Update the test and train files under resources. Lasagna can be used to transform nlu.md format to simple CSV.
+To train 
+
+`pipenv run train`
+
+This updates the model and tokenizer instance.
  
- And that's it! ...  
 
 
 

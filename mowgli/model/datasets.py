@@ -1,10 +1,10 @@
 import pickle
 
+import csv
 import numpy as np
 import tensorflow as tf
 import tensorflow_text as text
-from sklearn.feature_extraction.text import CountVectorizer
-from tensorflow_core.python import keras
+from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow_core.python.keras import backend as K
 from tensorflow_core.python.keras import layers
 
@@ -31,13 +31,15 @@ def f1_m(y_true, y_pred):
     return 2 * ((precision * recall) / (precision + recall + K.epsilon()))
 
 
-def parse(line):
-    split_line = tf.strings.split(line, sep=',', maxsplit=1)
-    return tf.strings.to_number(split_line[0], out_type=tf.dtypes.int32), split_line[1]
-
-
 def load_dataset(dataset_path):
-    return tf.data.TextLineDataset(dataset_path).map(parse)
+    with open(dataset_path, "r") as csvfile:
+        reader = csv.reader(csvfile, delimiter=",")
+        labels = []
+        sentences = []
+        for line in reader:
+            labels.append(line[0])
+            sentences.append(",".join(line[1:]))
+    return np.array(labels).astype(int), sentences
 
 
 def tokenize(dataset):
@@ -50,11 +52,11 @@ def persist_vectorizer(vectorizer):
 
 
 def encode_vectorize(dataset, vocabulary_count):
-    vectorizer = CountVectorizer(max_features=vocabulary_count)
+    tokenizer = Tokenizer(num_words=vocabulary_count, oov_token="<OOH_TKN>")
     # encoded_matrix = map(vectorizer.fit_transform, dataset)
     # print('Encoded Matrix ', np.array(list(encoded_matrix)))
-    encoded_matrix = vectorizer.fit_transform(dataset)
-    return encoded_matrix, vectorizer
+    tokenizer.fit_on_texts(dataset)
+    return tokenizer.texts_to_sequences(dataset), tokenizer
 
 
 def split(data):
@@ -72,28 +74,32 @@ def reformat_network_dataset(given_dataset, columne_size):
     return given_dataset[:, -1], result_arr
 
 
-def build_network(train_x, train_y, test_x, test_y, epochs):
-    input_layer = keras.Input(shape=[train_x.shape[1], ], name='tokens')
-    hidden_layer = layers.Dense(150, activation="relu")(input_layer)
-    hidden_layer = layers.Dense(70, activation="relu")(hidden_layer)
-    # hidden_layer = layers.Dense(20, activation="relu")(hidden_layer)
-    # print(len(labels[0]))
-    output_layer = layers.Dense(len(train_y[0]), name='IntentClassification',
-                                activation="softmax")(hidden_layer)
-    model = keras.Model(inputs=input_layer, outputs=output_layer)
+def build_network(train_x, train_y, test_x, test_y, epochs, total, max_length):
+
+    print("total words", total)
+    model = tf.keras.Sequential([
+        layers.Embedding(total + 1, 64, input_length=max_length),
+        layers.Dropout(.1),
+        layers.Flatten(),
+        layers.Dense(600, activation='relu'),
+        layers.Dense(300, activation='relu'),
+        layers.Dense(16, activation='softmax')
+        ]
+    )
     model.compile(optimizer='Adam',  # Optimizer
                   # Loss function to minimize
-                  loss="categorical_crossentropy",
-                  metrics=['mae', 'acc']  # ,recall_m,precision_m, f1_m]
+                  loss="sparse_categorical_crossentropy"
+                ,metrics=['acc']
                   )
+    model.summary()
     print('# Fit model on training data')
     print('validation sets', test_x.shape, test_y.shape)
     # print('validation sets', test_x, test_y)
     print('train sets', train_x.shape, train_y.shape)
-    history = model.fit(train_x.toarray(), train_y,
+    history = model.fit(train_x, train_y,
                         batch_size=2,
-                        epochs=epochs,
-                        validation_data=(test_x.toarray(), test_y)
+                        epochs=10,
+                        validation_data=(test_x, test_y)
                         )
     print('\nhistory dict:', history.history)
     return model
